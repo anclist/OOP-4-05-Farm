@@ -1,3 +1,8 @@
+require_relative 'farm'
+
+@@harvest = []
+
+
 class Farmer
 
   def main_menu
@@ -28,15 +33,31 @@ class Farmer
   end
 
   def field
+    puts 'What kind of field is it: corn or wheat?'
+    kind = gets.chomp
+      if kind == "corn" || kind == "wheat"
+        kind
+        puts 'How large is the field in hectares?'
+        size = gets.chomp
+      else
+        puts "That's the wrong option"
+        self.field
+      end
 
+    new_field = Farm.create(kind, size)
+    puts "Added a #{kind} field of #{size} hectares!"
   end
 
   def harvest
-
+    Farm.harvest
+    status
   end
 
   def status
-
+    Farm.fields.each do |field|
+      puts "#{field.kind.capitalize} field is #{field.size} hectares."
+    end
+    puts "The farm has #{Farm.harvested} harvested food so far."
   end
 
   def relax
