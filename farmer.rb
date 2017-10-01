@@ -50,18 +50,28 @@ class Farmer
 
   def harvest
     Farm.harvest
-    status
+    Farm.fields.each do |field|
+      puts "Harvesting #{field.production} food from #{field.size} hectare #{field.kind} field."
+    end
+    status_2
   end
 
   def status
-    Farm.fields.each do |field|
-      puts "#{field.kind.capitalize} field is #{field.size} hectares."
-    end
+      Farm.fields.each do |field|
+        puts "#{field.kind.capitalize} field is #{field.size} hectares."
+      end
+      status_2
+  end
+
+  def status_2
     puts "The farm has #{Farm.harvested} harvested food so far."
   end
 
   def relax
-
+    corn_hectares = Farm.hectares("corn")
+    wheat_hectares = Farm.hectares("wheat")
+    puts "#{corn_hectares} hectares of tall green stalks rustling in the breeze fill your horizon.
+The sun hangs low, casting an orange glow on a sea of #{wheat_hectares} hectares of wheat."
   end
 
 end

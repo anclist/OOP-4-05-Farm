@@ -1,4 +1,3 @@
-require 'pry'
 
 class Farm
 
@@ -33,7 +32,6 @@ class Farm
 
   def production
     production = self.size.to_i * self.productivity.to_i
-    binding.pry
   end
   def self.harvested
     @@harvested
@@ -41,6 +39,16 @@ class Farm
 
   def self.fields
     @@fields
+  end
+
+  def self.hectares(kind)
+    total_hectares = 0
+    @@fields.each do |field|
+      if field.kind == kind
+        total_hectares += field.size.to_i
+      end
+    end
+    return total_hectares
   end
 
 end
